@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 需求 1：营养池的燃料标签（CompProperties_Refuelable.fuelLabel 带 [MustTranslate]） -->
+  <UniversalGeneCompiler.comps.CompRefuelable.fuelLabel>营养</UniversalGeneCompiler.comps.CompRefuelable.fuelLabel>
+
+</LanguageData>

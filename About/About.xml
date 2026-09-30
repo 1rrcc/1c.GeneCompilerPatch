@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>UniversalGeneCompiler Patch</name>
+  <author>1c</author>
+  <packageId>1c.GeneCompilerPatch</packageId>
+  <supportedVersions>
+    <li>1.6</li>
+  </supportedVersions>
+  <modVersion>1.0.0</modVersion>
+  <modDependencies>
+    <li>
+      <packageId>Chezhou.UniversalGeneCompiler</packageId>
+      <displayName>UniversalGeneCompiler</displayName>
+    </li>
+    <li>
+      <packageId>brrainz.harmony</packageId>
+      <displayName>Harmony</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+    </li>
+  </modDependencies>
+  <loadAfter>
+    <li>Chezhou.UniversalGeneCompiler</li>
+    <li>brrainz.harmony</li>
+  </loadAfter>
+  <description>针对 UniversalGeneCompiler（通用基因编译器）的修复补丁包：
+
+[list]
+[*]营养供给：仿原版培育仓，建筑内置营养池（上限 10），小人自动搬运食物补料；舱内人员按实际饱食度缺口消耗营养并保持吃饱，断电或营养耗尽时正常挨饿。
+[*]自动入舱：舱内人员完成一次定向提取后会被记住，提取冷却结束时自动重新安排入舱（殖民者自行走入，囚犯由搬运工搬入），入舱后提示一次消息；建筑新增可随时关闭的开关。
+[*]朝向修复：修正建筑旋转后舱内人员位置错位的问题，并补齐缺失的南向贴图。
+[*]提取作业计时：点「提取基因」后不再立刻入库，而是先跑一段计时作业（默认 6 游戏内小时，可在设置里改，设为 0 即关闭）；期间建筑上方显示进度条，归零时真正提取并自动把小人弹出。中途点「弹出小人」会先弹确认窗口，确认后才强制中断作业并弹出。
+[*]属性显示修复：关闭两个 StatDef 的 showOnDefaultValue 并补上 showIfUndefined=false，使其只出现在通用基因编译器上。
+[*]搬运优先级：提高把人员搬入通用基因编译器的 WorkGiver 优先级。
+[*]模组设置：可调定向提取冷却时长与提取作业耗时，并提供恢复默认按钮。
+[/list]</description>
+</ModMetaData>

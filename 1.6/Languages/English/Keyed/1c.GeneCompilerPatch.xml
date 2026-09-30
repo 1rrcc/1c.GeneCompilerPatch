@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- ===== Mod settings (req 6: directed extraction cooldown) ===== -->
+  <UGCPatch_SettingsHeader>Universal gene compiler patch</UGCPatch_SettingsHeader>
+  <UGCPatch_CooldownLabel>Directed extraction cooldown</UGCPatch_CooldownLabel>
+  <UGCPatch_DaysValue>{0} day(s)</UGCPatch_DaysValue>
+  <UGCPatch_CooldownHint>Applies to the cooldown inflicted by directed extraction (the mod default is 1 day). Set it to 0 to remove the cooldown entirely.</UGCPatch_CooldownHint>
+
+  <!-- ===== Mod settings (req 7: extraction job timer) ===== -->
+  <UGCPatch_ExtractionHeader>Extraction job timer</UGCPatch_ExtractionHeader>
+  <UGCPatch_ExtractionHoursLabel>Extraction job duration</UGCPatch_ExtractionHoursLabel>
+  <UGCPatch_HoursValue>{0} hour(s)</UGCPatch_HoursValue>
+  <UGCPatch_ExtractionHoursHint>Pressing "Extract gene" in the console no longer stores the gene instantly. Instead a timed job runs: a progress bar is shown above the machine, and only when it reaches zero is the gene actually extracted and the pawn automatically ejected. Set it to 0 to disable the timer and restore the original instant extraction.</UGCPatch_ExtractionHoursHint>
+
+  <UGCPatch_ResetDefaults>Restore defaults</UGCPatch_ResetDefaults>
+  <UGCPatch_ResetDefaultsDesc>Restores both settings above: extraction cooldown 1 day, extraction job duration 6 hours.</UGCPatch_ResetDefaultsDesc>
+  <UGCPatch_ResetDone>Settings restored to default.</UGCPatch_ResetDone>
+
+  <!-- ===== Auto re-enter (req 2) ===== -->
+  <UGCPatch_AutoExtraction>Auto re-enter after cooldown</UGCPatch_AutoExtraction>
+  <UGCPatch_AutoExtractionDesc>When the occupant's extraction cooldown expires, automatically queue them to enter the compiler again (colonists walk in on their own; prisoners are carried in by a hauler). The extraction itself is still started manually from the console.</UGCPatch_AutoExtractionDesc>
+  <UGCPatch_AutoEntered>{PAWN} re-entered the universal gene compiler.</UGCPatch_AutoEntered>
+  <UGCPatch_AutoWaiting>Waiting to re-enter: {PAWN} (extraction cooldown)</UGCPatch_AutoWaiting>
+
+  <!-- ===== Extraction job (req 7) ===== -->
+  <UGCPatch_ExtractionJobStarted>Extraction job started: {0}. Estimated duration {1}. The pawn will be ejected automatically when it finishes.</UGCPatch_ExtractionJobStarted>
+  <UGCPatch_ExtractionJobRunning>Extraction job: {0} ({1} left)</UGCPatch_ExtractionJobRunning>
+  <UGCPatch_ExtractionJobPaused>Extraction job: {0} (paused, no power, {1} left)</UGCPatch_ExtractionJobPaused>
+  <UGCPatch_ExtractionJobPausedShort>Extraction job paused (no power): {0} left</UGCPatch_ExtractionJobPausedShort>
+  <UGCPatch_ExtractionJobShort>Extraction job: {0} left</UGCPatch_ExtractionJobShort>
+  <UGCPatch_ExtractionJobDone>Extraction job complete: gene {0} was extracted from {1}; ejecting automatically.</UGCPatch_ExtractionJobDone>
+  <UGCPatch_ExtractionJobFailed>Extraction job failed: the gene could no longer be extracted when the job finished.</UGCPatch_ExtractionJobFailed>
+  <UGCPatch_ExtractionJobAborted>Extraction job cancelled: nobody is inside the machine any more.</UGCPatch_ExtractionJobAborted>
+  <UGCPatch_ExtractionBusy>An extraction job is already running ({1} left); {0} cannot be extracted until it finishes.</UGCPatch_ExtractionBusy>
+  <UGCPatch_ForceEjectTitle>Confirm force eject</UGCPatch_ForceEjectTitle>
+  <UGCPatch_ForceEjectConfirm>The universal gene compiler is running an extraction job: {0} ({1} left).\n\nForcing the eject will cancel the job and lose its progress, and the pawn will be ejected next to the machine. Force eject?</UGCPatch_ForceEjectConfirm>
+
+  <!-- ===== Nutrition pool (req 1) ===== -->
+  <UGCPatch_NoNutrition>No nutrition stored - the occupant is starving.</UGCPatch_NoNutrition>
+  <UGCPatch_NutritionFeeding>Feeding: {PAWN}</UGCPatch_NutritionFeeding>
+
+</LanguageData>

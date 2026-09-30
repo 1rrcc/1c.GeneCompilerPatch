@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- ===== 模组设置（需求 6：定向提取冷却时长） ===== -->
+  <UGCPatch_SettingsHeader>通用基因编译器 修复补丁</UGCPatch_SettingsHeader>
+  <UGCPatch_CooldownLabel>定向提取冷却时长</UGCPatch_CooldownLabel>
+  <UGCPatch_DaysValue>{0} 天</UGCPatch_DaysValue>
+  <UGCPatch_CooldownHint>只影响「定向提取」结束后给小人挂上的冷却状态（原模组为 1 天）。设为 0 即完全不施加冷却。</UGCPatch_CooldownHint>
+
+  <!-- ===== 模组设置（需求 7：提取作业计时） ===== -->
+  <UGCPatch_ExtractionHeader>提取作业计时</UGCPatch_ExtractionHeader>
+  <UGCPatch_ExtractionHoursLabel>提取作业耗时</UGCPatch_ExtractionHoursLabel>
+  <UGCPatch_HoursValue>{0} 小时</UGCPatch_HoursValue>
+  <UGCPatch_ExtractionHoursHint>在控制台点「提取基因」后不再立刻入库，而是先跑一段计时作业：计时期间建筑上方会显示进度条，归零时才真正提取并把小人自动弹出。设为 0 即关闭计时（恢复原模组「点完立刻提取」的行为）。</UGCPatch_ExtractionHoursHint>
+
+  <UGCPatch_ResetDefaults>恢复默认</UGCPatch_ResetDefaults>
+  <UGCPatch_ResetDefaultsDesc>把以上两项恢复为默认值：定向提取冷却 1 天、提取作业耗时 6 小时。</UGCPatch_ResetDefaultsDesc>
+  <UGCPatch_ResetDone>设置已恢复为默认值。</UGCPatch_ResetDone>
+
+  <!-- ===== 自动入舱（需求 2） ===== -->
+  <UGCPatch_AutoExtraction>冷却结束后自动入舱</UGCPatch_AutoExtraction>
+  <UGCPatch_AutoExtractionDesc>当舱内人员的提取冷却结束时，自动重新安排他进入通用基因编译器（殖民者自己走进去，囚犯由搬运工搬进去）。提取动作本身仍需在控制台里手动执行。</UGCPatch_AutoExtractionDesc>
+  <UGCPatch_AutoEntered>{PAWN} 再次进入了通用基因编译器。</UGCPatch_AutoEntered>
+  <UGCPatch_AutoWaiting>等待再次入舱：{PAWN}（提取冷却中）</UGCPatch_AutoWaiting>
+
+  <!-- ===== 提取作业（需求 7） ===== -->
+  <UGCPatch_ExtractionJobStarted>已开始提取作业：{0}。预计耗时 {1}，结束后会自动把小人弹出。</UGCPatch_ExtractionJobStarted>
+  <UGCPatch_ExtractionJobRunning>提取作业：{0}（剩余 {1}）</UGCPatch_ExtractionJobRunning>
+  <UGCPatch_ExtractionJobPaused>提取作业：{0}（断电暂停，剩余 {1}）</UGCPatch_ExtractionJobPaused>
+  <UGCPatch_ExtractionJobPausedShort>提取作业暂停（断电），剩余 {0}</UGCPatch_ExtractionJobPausedShort>
+  <UGCPatch_ExtractionJobShort>提取作业剩余 {0}</UGCPatch_ExtractionJobShort>
+  <UGCPatch_ExtractionJobDone>提取作业完成：已从 {1} 提取基因 {0}，正在自动弹出。</UGCPatch_ExtractionJobDone>
+  <UGCPatch_ExtractionJobFailed>提取作业失败：作业完成时已经无法提取该基因了。</UGCPatch_ExtractionJobFailed>
+  <UGCPatch_ExtractionJobAborted>提取作业已中断：舱内已经没有人了。</UGCPatch_ExtractionJobAborted>
+  <UGCPatch_ExtractionBusy>提取作业正在进行（剩余 {1}），完成之前无法再提取 {0}。</UGCPatch_ExtractionBusy>
+  <UGCPatch_ForceEjectTitle>强制弹出确认</UGCPatch_ForceEjectTitle>
+  <UGCPatch_ForceEjectConfirm>通用基因编译器正在执行提取作业：{0}（剩余 {1}）。\n\n强制弹出会立刻中断这份作业并丢失进度，小人会被弹出到机器旁边。确定要强制弹出吗？</UGCPatch_ForceEjectConfirm>
+
+  <!-- ===== 营养池（需求 1） ===== -->
+  <UGCPatch_NoNutrition>营养池已空——舱内人员正在挨饿。</UGCPatch_NoNutrition>
+  <UGCPatch_NutritionFeeding>正在喂食：{PAWN}</UGCPatch_NutritionFeeding>
+
+</LanguageData>
