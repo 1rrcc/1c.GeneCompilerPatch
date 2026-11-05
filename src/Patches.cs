@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using HarmonyLib;
@@ -37,6 +38,9 @@ namespace GeneCompilerPatch
 
             TryPatch(harmony, OperationServiceTypeName, "TryExtract",
                 typeof(Patch_ExtractionCooldown), "TryExtractPostfix", "提取冷却时长");
+
+            TryPatch(harmony, OperationServiceTypeName, "GetInjectionPrice",
+                typeof(Patch_ArchiteGenePrice), "GetInjectionPricePostfix", "超凡基因注入单价");
 
             TryPatch(harmony, OperationServiceTypeName, "TryExtract",
                 typeof(Patch_ExtractionTimer), "TryExtractPrefix", "提取作业计时", prefix: true);
@@ -260,6 +264,109 @@ namespace GeneCompilerPatch
             if (disappears != null)
             {
                 disappears.SetDuration(ticks);
+            }
+        }
+    }
+
+    /// <summary>
+    /// 把超凡基因注入的单价改为设置值。
+    ///
+    /// 原模组 GeneOperationService.GetInjectionPrice =
+    ///   待注入基因的复杂度合计 × 300 + 待注入的超凡基因数 × 10000。
+    /// 这里只替换「超凡基因数 × 10000」这一项：postfix 按原方法同一定义数出超凡基因个数，
+    /// 把差额补进返回值，复杂度计费与「已拥有该基因则不收费」等规则全部保持原样。
+    /// 付款（TryInject）、注入页报价、模板页报价都调用本方法，所以改这一处即可全局一致。
+    /// </summary>
+    internal static class Patch_ArchiteGenePrice
+    {
+        /// <summary>原模组 GeneOperationService.SilverPerArchiteGene。</summary>
+        internal const int VanillaArchiteGeneSilver = 10000;
+
+        private static bool resolved;
+        private static MethodInfo genesRequiringInjectionMethod;
+
+        public static void GetInjectionPricePostfix(ref int __result, object __0, IEnumerable<GeneDef> __1)
+        {
+            GeneCompilerPatchSettings settings = GeneCompilerPatchMod.Settings;
+            if (settings == null)
+            {
+                return;
+            }
+
+            int unitPrice = settings.ArchiteGeneSilver;
+            if (unitPrice == VanillaArchiteGeneSilver)
+            {
+                return; // 默认值：不介入，零开销。
+            }
+
+            int count = CountArchiteGenes(__0 as Pawn, __1);
+            if (count <= 0)
+            {
+                return;
+            }
+
+            // 差额可正可负；调低后不允许低于 0，复杂度部分仍按原方法保留。
+            __result = Mathf.Max(0, __result + count * (unitPrice - VanillaArchiteGeneSilver));
+        }
+
+        /// <summary>
+        /// 数出「本次注入真正需要新增的超凡基因」个数。
+        /// 优先调用原模组的私有方法 GetGenesRequiringInjection，保证口径与其完全一致；
+        /// 反射不可用时退回到同样的筛选规则（排除小人已经拥有的基因）。
+        /// </summary>
+        private static int CountArchiteGenes(Pawn pawn, IEnumerable<GeneDef> genes)
+        {
+            if (genes == null)
+            {
+                return 0;
+            }
+
+            EnsureResolved();
+            if (genesRequiringInjectionMethod != null)
+            {
+                try
+                {
+                    List<GeneDef> list =
+                        genesRequiringInjectionMethod.Invoke(null, new object[] { pawn, genes }) as List<GeneDef>;
+                    if (list != null)
+                    {
+                        return list.Count(g => g != null && g.biostatArc > 0);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.Warning("[1c.GeneCompilerPatch] 读取原模组待注入基因列表失败，改按本地规则统计：" + ex.Message);
+                    genesRequiringInjectionMethod = null;
+                }
+            }
+
+            IEnumerable<GeneDef> remaining = genes.Where(g => g != null).Distinct();
+            if (pawn != null && pawn.genes != null)
+            {
+                remaining = remaining.Where(g => !pawn.genes.HasEndogene(g) && !pawn.genes.HasXenogene(g));
+            }
+            return remaining.Count(g => g.biostatArc > 0);
+        }
+
+        private static void EnsureResolved()
+        {
+            if (resolved)
+            {
+                return;
+            }
+            resolved = true;
+
+            try
+            {
+                Type opType = AccessTools.TypeByName(PatchBootstrap.OperationServiceTypeName);
+                if (opType != null)
+                {
+                    genesRequiringInjectionMethod = AccessTools.Method(opType, "GetGenesRequiringInjection");
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Warning("[1c.GeneCompilerPatch] 超凡基因单价反射初始化失败：" + ex.Message);
             }
         }
     }

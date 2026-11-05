@@ -22,6 +22,7 @@
 | 5 | 把人搬进机器的 WorkGiver 优先级 90 → 160 | XML patch |
 | 6 | 定向提取冷却时长可调（默认 1 天，0 = 不冷却） | Harmony postfix |
 | 7 | 提取改成计时作业（默认 6 游戏内小时，可调，0 = 关闭），到点入库并**自动弹出**；中途手动弹出会先弹确认窗；**断电暂停** | 自研 comp + Harmony prefix |
+| 8 | 超凡基因注入单价可调（默认 10000 白银 / 个，0 = 不额外收费）；普通基因仍按复杂度计费 | Harmony postfix（改 `GetInjectionPrice`） |
 
 ## 仓库结构
 
@@ -39,12 +40,12 @@ LoadFolders.xml
 
 | 文件 | 职责 |
 |---|---|
-| `GeneCompilerPatchMod.cs` / `GeneCompilerPatchSettings.cs` | Mod 入口与设置（冷却天数、作业小时数、恢复默认） |
+| `GeneCompilerPatchMod.cs` / `GeneCompilerPatchSettings.cs` | Mod 入口与设置（冷却天数、作业小时数、超凡基因白银单价、恢复默认） |
 | `UGCDefs.cs` | 按 defName 取原模组的 hediff、取舱内人员（避免引用其程序集） |
 | `Comp_UGCNutritionFeeder.cs` | 需求 1：用营养池换饱食度 |
 | `Comp_UGCAutoExtraction.cs` | 需求 2：冷却结束自动入舱 + gizmo 开关 |
 | `Comp_UGCExtractionTimer.cs` | 需求 7：提取计时作业、进度条、断电暂停、到点入库并弹出 |
-| `Patches.cs` | 所有 Harmony 补丁与反射句柄（朝向 / 冷却 / 计时 / 弹出确认） |
+| `Patches.cs` | 所有 Harmony 补丁与反射句柄（朝向 / 冷却 / 计时 / 弹出确认 / 超凡基因单价） |
 
 ## 工作方式
 
@@ -53,11 +54,12 @@ LoadFolders.xml
 2. **自研 comp**：挂在该 ThingDef 上，`tickerType` 是 `Normal`，所以走每 tick 的 `CompTick`。
    状态都在 comp 里，用 `PostExposeData` 存档。
 3. **Harmony**（`Patches.cs`）：`[StaticConstructorOnStartup]` 里逐项挂，
-   目标类型 / 方法全部按名字反射解析。目前四个 patch 点：
+   目标类型 / 方法全部按名字反射解析。目前五个 patch 点：
    - `get_PawnDrawOffset` / `get_HeldPawnBodyAngle` / `GetArmMotionOffset`（南向 180° 变换，只在南向且贴图存在时生效）
    - `GeneOperationService.TryExtract`（计时器：合法则启动作业并拦下；不合法则放行让原方法报错）
    - `Building_UniversalGeneCompiler.EjectPawn`（作业中先弹确认窗）
    - `GeneOperationService.TryExtract` 的 postfix（改冷却时长）
+   - `GeneOperationService.GetInjectionPrice` 的 postfix（改超凡基因单价；付款与界面报价同走此方法）
 
 ## 如何并入源模组
 

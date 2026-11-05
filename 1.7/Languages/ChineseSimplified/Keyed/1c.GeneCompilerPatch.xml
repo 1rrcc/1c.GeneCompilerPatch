@@ -13,8 +13,14 @@
   <UGCPatch_HoursValue>{0} 小时</UGCPatch_HoursValue>
   <UGCPatch_ExtractionHoursHint>在控制台点「提取基因」后不再立刻入库，而是先跑一段计时作业：计时期间建筑上方会显示进度条，归零时才真正提取并把小人自动弹出。设为 0 即关闭计时（恢复原模组「点完立刻提取」的行为）。</UGCPatch_ExtractionHoursHint>
 
+  <!-- ===== 模组设置（超凡基因注入白银） ===== -->
+  <UGCPatch_ArchiteSilverHeader>超凡基因注入</UGCPatch_ArchiteSilverHeader>
+  <UGCPatch_ArchiteSilverLabel>超凡基因单价</UGCPatch_ArchiteSilverLabel>
+  <UGCPatch_SilverValue>{0} 白银 / 个</UGCPatch_SilverValue>
+  <UGCPatch_ArchiteSilverHint>注入时按「本次要新增的超凡基因个数」收取白银，原模组为 10000 白银 / 个（滑块步进 100）。普通基因仍按复杂度计费（每点 300 白银），小人已经拥有的基因不计费。设为 0 即超凡基因不再额外收白银。\n\n用「仓储点」付款时仍沿用原模组的 9000 点 / 个，不受本设置影响。</UGCPatch_ArchiteSilverHint>
+
   <UGCPatch_ResetDefaults>恢复默认</UGCPatch_ResetDefaults>
-  <UGCPatch_ResetDefaultsDesc>把以上两项恢复为默认值：定向提取冷却 1 天、提取作业耗时 6 小时。</UGCPatch_ResetDefaultsDesc>
+  <UGCPatch_ResetDefaultsDesc>把以上三项恢复为默认值：定向提取冷却 1 天、提取作业耗时 6 小时、超凡基因 10000 白银 / 个。</UGCPatch_ResetDefaultsDesc>
   <UGCPatch_ResetDone>设置已恢复为默认值。</UGCPatch_ResetDone>
 
   <!-- ===== 自动入舱（需求 2） ===== -->

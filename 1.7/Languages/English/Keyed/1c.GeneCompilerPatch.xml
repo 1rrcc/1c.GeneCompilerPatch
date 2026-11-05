@@ -13,8 +13,14 @@
   <UGCPatch_HoursValue>{0} hour(s)</UGCPatch_HoursValue>
   <UGCPatch_ExtractionHoursHint>Pressing "Extract gene" in the console no longer stores the gene instantly. Instead a timed job runs: a progress bar is shown above the machine, and only when it reaches zero is the gene actually extracted and the pawn automatically ejected. Set it to 0 to disable the timer and restore the original instant extraction.</UGCPatch_ExtractionHoursHint>
 
+  <!-- ===== Mod settings (archite gene injection silver) ===== -->
+  <UGCPatch_ArchiteSilverHeader>Archite gene injection</UGCPatch_ArchiteSilverHeader>
+  <UGCPatch_ArchiteSilverLabel>Silver per archite gene</UGCPatch_ArchiteSilverLabel>
+  <UGCPatch_SilverValue>{0} silver each</UGCPatch_SilverValue>
+  <UGCPatch_ArchiteSilverHint>Silver charged for each archite gene newly added by an injection. The mod default is 10,000 silver each (slider step 100). Ordinary genes are still charged by complexity (300 silver per point), and genes the pawn already has are free. Set it to 0 to remove the archite surcharge.\n\nPaying with warehouse points still uses the mod's 9,000 points per gene and is not affected by this setting.</UGCPatch_ArchiteSilverHint>
+
   <UGCPatch_ResetDefaults>Restore defaults</UGCPatch_ResetDefaults>
-  <UGCPatch_ResetDefaultsDesc>Restores both settings above: extraction cooldown 1 day, extraction job duration 6 hours.</UGCPatch_ResetDefaultsDesc>
+  <UGCPatch_ResetDefaultsDesc>Restores all three settings above: extraction cooldown 1 day, extraction job duration 6 hours, archite gene 10,000 silver each.</UGCPatch_ResetDefaultsDesc>
   <UGCPatch_ResetDone>Settings restored to default.</UGCPatch_ResetDone>
 
   <!-- ===== Auto re-enter (req 2) ===== -->
